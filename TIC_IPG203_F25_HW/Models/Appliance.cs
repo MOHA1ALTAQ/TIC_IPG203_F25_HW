@@ -9,19 +9,36 @@ namespace TIC_IPG203_F25_HW.Models
 {
     public abstract class Appliance : IRepairable
     {
-        public string SerialNumber { get; set; }
-        public string Brand { get; set; }
-        public string Model { get; set; }
-        public RepairStatus Status { get; set; }
-        public DateTime DateReceived { get; set; }
+        private readonly string serialNumber;
+        private string brand;
+        private string model;
+        private RepairStatus status;
+        private readonly DateTime dateReceived;
+        public string SerialNumber => serialNumber;
 
+        public string Brand
+        {
+            get { return brand; }
+            set { brand = value; }
+        }
+        public string Model
+        {
+            get { return model; }
+            set { model = value; }
+        }
+        public RepairStatus Status
+        {
+            get { return status; }
+            set { status = value; }
+        }
+        public DateTime DateReceived => dateReceived;
         protected Appliance(string serialNumber, string brand, string model)
         {
-            SerialNumber = serialNumber;
-            Brand = brand;
-            Model = model;
-            Status = RepairStatus.Received;
-            DateReceived = DateTime.Now;
+            this.serialNumber = serialNumber;
+            this.brand = brand;
+            this.model = model;
+            this.status = RepairStatus.Received;
+            this.dateReceived = DateTime.Now;
         }
 
         public abstract decimal RepairCost();
