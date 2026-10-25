@@ -8,5 +8,4 @@ namespace TIC_IPG203_F25_HW.Events
 {
     public delegate void MaintenanceStatusHandler(string message);
 
-
 }
