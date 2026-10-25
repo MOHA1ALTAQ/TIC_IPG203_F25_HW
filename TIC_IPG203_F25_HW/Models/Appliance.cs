@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TIC_IPG203_F25_HW.Interfaces;
-
+using TIC_IPG203_F25_HW.Events;
 namespace TIC_IPG203_F25_HW.Models
 {
     public abstract class Appliance : IRepairable
@@ -14,6 +14,7 @@ namespace TIC_IPG203_F25_HW.Models
         private string model;
         private RepairStatus status;
         private readonly DateTime dateReceived;
+        public event MaintenanceStatusHandler OnStatusChanged;
         public string SerialNumber => serialNumber;
 
         public string Brand
@@ -29,7 +30,17 @@ namespace TIC_IPG203_F25_HW.Models
         public RepairStatus Status
         {
             get { return status; }
-            set { status = value; }
+            set
+            {
+                status = value;
+
+                if (status == RepairStatus.Repaired)
+                {
+                    OnStatusChanged?.Invoke(
+                        "Appliance " + SerialNumber + " has been repaired."
+                    );
+                }
+            }
         }
         public DateTime DateReceived => dateReceived;
         protected Appliance(string serialNumber, string brand, string model)
