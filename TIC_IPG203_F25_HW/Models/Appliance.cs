@@ -14,7 +14,7 @@ namespace TIC_IPG203_F25_HW.Models
         private string model;
         private RepairStatus status;
         private readonly DateTime dateReceived;
-        public event MaintenanceStatusHandler OnStatusChanged;
+        public event MaintenanceStatusHandler? OnStatusChanged;
         public string SerialNumber => serialNumber;
 
         public string Brand
